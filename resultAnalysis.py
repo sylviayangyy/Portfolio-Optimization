@@ -24,12 +24,12 @@ def visualize(ret_value, risk_value, gamma, save2png=True, filename="figures/ret
     min_risk_ret = ret_value[np.argmin(risk_value)]
     min_risk_risk = risk_value[np.argmin(risk_value)]
     min_risk_gamma = gamma[np.argmin(risk_value)]
-    plt.scatter(max_sharpe_risk, max_sharpe_ret, color='b', s=120)
-    annotation = "       Maximum Sharpe ratio = " + "{0:.2f}".format(np.max(sharpe)) + "\n       gamma = " + "{0:.2f}".format(max_sharpe_gamma)
-    plt.annotate(annotation, (max_sharpe_risk, max_sharpe_ret))
-    plt.scatter(min_risk_risk, min_risk_ret, color='g', s=120)
-    annotation = "     Minimum Risk = " + "{0:.2f}".format(np.min(risk_value)) + "\n     gamma = " + "{0:.2f}".format(min_risk_gamma)
-    plt.annotate(annotation, (min_risk_risk, min_risk_ret))
+    plt.scatter(max_sharpe_risk, max_sharpe_ret, color='C2', s=120)
+    annotation = "Maximum Sharpe ratio = " + "{0:.2f}".format(np.max(sharpe)) + "\ngamma = " + "{0:.2f}".format(max_sharpe_gamma)
+    plt.annotate(annotation, (max_sharpe_risk, max_sharpe_ret), (max_sharpe_risk+0.2, max_sharpe_ret-0.05))
+    plt.scatter(min_risk_risk, min_risk_ret, color='C0', s=120)
+    annotation = "Minimum Risk = " + "{0:.2f}".format(np.min(risk_value)) + "\ngamma = " + "{0:.2f}".format(min_risk_gamma)
+    plt.annotate(annotation, (min_risk_risk, min_risk_ret), (min_risk_risk+0.2, min_risk_ret))
 
     plt.savefig(filename)
 
