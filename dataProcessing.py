@@ -10,7 +10,9 @@ def readCSVs(period=1, annual_risk_free_rate=0.05):
 
     securities = securities.rename(columns = {'Ticker symbol' : 'symbol','GICS Sector' : 'sector'})
     prices = prices.merge(securities[['symbol', 'sector']], on='symbol')
-    prices = prices[prices['date'] >= '2015-01-01'] # only consider data in 2015 and 2016
+    prices = prices[prices['date'] >= '2015-01-01'] 
+    prices = prices[prices['date'] < '2016-01-01']
+    # only consider data in 2015
 
     sector_pivot = pd.pivot_table(prices, values='close', index=['date'], columns=['sector']).reset_index()
 

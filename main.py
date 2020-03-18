@@ -6,14 +6,14 @@ from resultAnalysis import *
 from dataProcessing import *
 import numpy as np
 
-n = 18 # the number of stocks the customer wants to hold at the same time
+n = 22 # the number of stocks the customer wants to hold at the same time
 period = 10
 
 prices, _, _, stock = readCSVs(period=period)
-sectorList = ['Energy', 'Financials', 'Industrials', 'Information Technology','Materials', 'Utilities']
+sectorList = ['Consumer Discretionary', 'Consumer Staples', 'Energy', 'Financials', 'Health Care', 'Industrials', 'Information Technology','Materials', 'Real Estate', 'Telecommunications Services', 'Utilities']
 stockName = []
 for i in sectorList:
-    stockName += selectStocksFromSector(stock, i, n=3)
+    stockName += selectStocksFromSector(stock, i, n=2)
 print(stockName)
 
 mu, Sigma = statistics(prices, stockName)
