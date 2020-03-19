@@ -3,15 +3,16 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
 
-def readCSVs(period=1, annual_risk_free_rate=0.05):
+def readCSVs(period=1, annual_risk_free_rate=0.05, start_date='2015-01-01', end_date='2016-01-01'):
     prices = pd.read_csv('nyse/prices-split-adjusted.csv')
     securities = pd.read_csv('nyse/securities.csv')
     fundamentals = pd.read_csv('nyse/fundamentals.csv')
 
     securities = securities.rename(columns = {'Ticker symbol' : 'symbol','GICS Sector' : 'sector'})
     prices = prices.merge(securities[['symbol', 'sector']], on='symbol')
-    prices = prices[prices['date'] >= '2015-01-01'] 
-    prices = prices[prices['date'] < '2016-01-01']
+    prices = prices[prices['date'] >= start_date]
+    if end_date!='':
+        prices = prices[prices['date'] < end_date]
     # only consider data in 2015
 
     sector_pivot = pd.pivot_table(prices, values='close', index=['date'], columns=['sector']).reset_index()
